@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Excercise_One
+namespace LogReader
 {
     public interface ILogReader
     {
         string GetThePathLogs();
-        List<LogData> SetValues(string path);
+        List<LogData> SetValues(string path=null);
         void ManipulateData(List<LogData> logList);
     }
 }

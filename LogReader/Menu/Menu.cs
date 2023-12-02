@@ -1,11 +1,12 @@
-﻿using System;
+﻿using LogReader.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Excercise_One
+namespace LogReader
 {
     public class Menu : IMenu
     {
@@ -88,6 +89,7 @@ namespace Excercise_One
                     switch (choice)
                     {
                         case LogType.ShowErrorLogs:
+                            ShowMeErrorLogs();
                             ShowMeErrorLogs(logList);
                             break;
                         case LogType.ShowWarningLogs:
@@ -107,6 +109,19 @@ namespace Excercise_One
                 }
             }
         }
+        private void ShowMeErrorLogs()
+        {
+            using var context = new DataContext();
+            var infoLogs = context.Log
+                    .Where(log => log.errorType == "INFO")
+                    .ToList();
+
+            Console.WriteLine("Logs with Error Type INFO:");
+            foreach (var log in infoLogs)
+            {
+                Console.WriteLine($"LogId: {log.LogId}, DateTime: {log.dateTime}, ErrorType: {log.errorType}, Description: {log.description}");
+            }
+        }
         private void ShowMeErrorLogs(List<LogData> data)
         {
             int i = 0;
@@ -120,6 +135,7 @@ namespace Excercise_One
             }
             Console.WriteLine("Total of {0} logs failed", i);
         }
+        
         private void ShowMeWarningLogs(List<LogData> data)
         {
             int i = 0;

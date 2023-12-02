@@ -1,0 +1,112 @@
+<log>
+    <entry>
+        <timestamp>2023-10-11 12:34:56</timestamp>
+        <level>INFO</level>
+        <message>User 'John' logged in.</message>
+    </entry>
+    <entry>
+        <timestamp>2023-10-11 13:45:02</timestamp>
+        <level>ERROR</level>
+        <message>Database connection failed.</message>
+    </entry>
+    <entry>
+        <timestamp>2023-10-11 14:20:30</timestamp>
+        <level>INFO</level>
+        <message>User 'Alice' logged in.</message>
+    </entry>
+    <entry>
+        <timestamp>2023-10-11 15:10:15</timestamp>
+        <level>INFO</level>
+        <message>User 'Bob' logged in.</message>
+    </entry>
+    <entry>
+        <timestamp>2023-10-11 15:30:45</timestamp>
+        <level>WARNING</level>
+        <message>Disk space is running low.</message>
+    </entry>
+    <entry>
+        <timestamp>2023-10-11 16:05:12</timestamp>
+        <level>ERROR</level>
+        <message>Application crashed unexpectedly.</message>
+    </entry>
+    <entry>
+        <timestamp>2023-10-11 16:45:22</timestamp>
+        <level>INFO</level>
+        <message>User 'Eve' logged in.</message>
+    </entry>
+    <entry>
+        <timestamp>2023-10-11 17:12:55</timestamp>
+        <level>INFO</level>
+        <message>User 'Charlie' logged in.</message>
+    </entry>
+    <entry>
+        <timestamp>2023-10-11 17:25:10</timestamp>
+        <level>WARNING</level>
+        <message>Server load is high.</message>
+    </entry>
+    <entry>
+        <timestamp>2023-10-11 17:55:40</timestamp>
+        <level>ERROR</level>
+        <message>Out of memory error.</message>
+    </entry>
+    <entry>
+        <timestamp>2023-10-11 18:30:01</timestamp>
+        <level>INFO</level>
+        <message>User 'David' logged in.</message>
+    </entry>
+    <entry>
+        <timestamp>2023-10-11 18:45:25</timestamp>
+        <level>WARNING</level>
+        <message>Network connection lost.</message>
+    </entry>
+    <entry>
+        <timestamp>2023-10-11 19:15:50</timestamp>
+        <level>INFO</level>
+        <message>User 'Frank' logged in.</message>
+    </entry>
+    <entry>
+        <timestamp>2023-10-11 19:30:15</timestamp>
+        <level>WARNING</level>
+        <message>Unauthorized access attempt detected.</message>
+    </entry>
+    <entry>
+        <timestamp>2023-10-11 20:05:33</timestamp>
+        <level>ERROR</level>
+        <message>File not found.</message>
+    </entry>
+    <entry>
+        <timestamp>2023-10-11 20:25:49</timestamp>
+        <level>INFO</level>
+        <message>User 'Grace' logged in.</message>
+    </entry>
+    <entry>
+        <timestamp>2023-10-11 20:45:10</timestamp>
+        <level>WARNING</level>
+        <message>Security breach detected.</message>
+    </entry>
+    <entry>
+        <timestamp>2023-10-11 21:15:27</timestamp>
+        <level>ERROR</level>
+        <message>Server shutdown initiated.</message>
+    </entry>
+    <entry>
+        <timestamp>2023-10-11 21:35:44</timestamp>
+        <level>INFO</level>
+        <message>User 'Hannah' logged in.</message>
+    </entry>
+    <entry>
+        <timestamp>2023-10-11 21:55:59</timestamp>
+        <level>INFO</level>
+        <message>User 'Isabella' logged in.</message>
+    </entry>
+    <entry>
+        <timestamp>2023-10-11 22:30:20</timestamp>
+        <level>WARNING</level>
+        <message>System update in progress.</message>
+    </entry>
+    <entry>
+        <timestamp>2023-10-11 22:55:45</timestamp>
+        <level>ERROR</level>
+        <message>Data corruption detected.</message>
+    </entry>
+</log>

@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace Excercise_One
+namespace LogReader
 {
     public class XmlLogReader : ILogReader
     {

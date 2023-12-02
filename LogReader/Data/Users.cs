@@ -1,4 +1,4 @@
-﻿namespace Excercise_One
+﻿namespace LogReader
 {
 
     public class Users

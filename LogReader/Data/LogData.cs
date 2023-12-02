@@ -1,11 +1,14 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
-namespace Excercise_One
+namespace LogReader
 {
     public class LogData
     {
-        public DateTime dateTime;
-        public string errorType;
-        public string description;
+        [Key]
+        public int LogId { get; set; }
+        public DateTime dateTime { get; set; }
+        public string errorType { get; set; }
+        public string description { get; set; }
     }
 }

@@ -1,16 +1,17 @@
-﻿using System;
+﻿using LogReader.DB;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection.Metadata;
 using System.Xml.Serialization;
 
-namespace Excercise_One
+namespace LogReader
 {
     public class Program
     {
         static void Main(string[] args)
         {
-            ILogReader logReader = new TxtLogReader();
+            ILogReader logReader = new DBLogReader();
             try
             {
                 var path = logReader.GetThePathLogs();
