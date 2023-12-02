@@ -20,23 +20,6 @@ namespace LogReader.DB
         {
             var context = new DataContext();
             var logsList = context.Log.ToList();
-
-
-            /*List<string> lines = File.ReadAllLines(path).ToList();
-            List<LogData> logsList = new List<LogData>();
-
-            for (int i = 0; i < lines.Count; i++)
-            {
-                LogData log = new LogData
-                {
-                    DateTime = GetDateTime(i, lines),
-                    ErrorType = GetErrorType(i, lines),
-                    Description = GetDescription(i, lines)
-                };
-
-                logsList.Add(log);
-            }*/
-
             return logsList;
         }
 
