@@ -7,8 +7,8 @@ namespace LogReader
     {
         [Key]
         public int LogId { get; set; }
-        public DateTime dateTime { get; set; }
-        public string errorType { get; set; }
-        public string description { get; set; }
+        public DateTime DateTime { get; set; }
+        public string ErrorType { get; set; }
+        public string Description { get; set; }
     }
 }

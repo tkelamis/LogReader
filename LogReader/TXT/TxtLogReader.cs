@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -18,27 +19,21 @@ namespace LogReader
             var pathOfFile = _menu.SelectFileToOpenAndGiveMeItsPath(listOfFiles);
             return pathOfFile;
         }
-
         public List<LogData> SetValues(string path)
         {
-            List<string> list = new List<string>();
-            using (StreamReader sr = new StreamReader(path))
-            {
-                while (sr.Peek() >= 0)
-                {
-                    list.Add(sr.ReadLine());
-                }
-            }
+            List<string> lines = File.ReadAllLines(path).ToList();
             List<LogData> logsList = new List<LogData>();
-            int i = -1;
-            foreach (var item in list)
+
+            for (int i = 0; i < lines.Count; i++)
             {
-                i++;
-                LogData log = new LogData();
+                LogData log = new LogData
+                {
+                    DateTime = GetDateTime(i, lines),
+                    ErrorType = GetErrorType(i, lines),
+                    Description = GetDescription(i, lines)
+                };
+
                 logsList.Add(log);
-                log.dateTime = GetDateTime(i, list);
-                log.errorType = GetErrorType(i, list);
-                log.description = GetDescription(i, list);
             }
             return logsList;
         }

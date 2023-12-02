@@ -18,30 +18,24 @@ namespace LogReader.DB
 
         public List<LogData> SetValues(string path)
         {
-            List<string> list = new List<string>();
-            using (StreamReader sr = new StreamReader(path))
-            {
-                while (sr.Peek() >= 0)
-                {
-                    list.Add(sr.ReadLine());
-                }
-            }
+            var context = new DataContext();
+            var logsList = context.Log.ToList();
+
+
+            /*List<string> lines = File.ReadAllLines(path).ToList();
             List<LogData> logsList = new List<LogData>();
-            int i = -1;
-            foreach (var item in list)
+
+            for (int i = 0; i < lines.Count; i++)
             {
-                i++;
-                LogData log = new LogData();
+                LogData log = new LogData
+                {
+                    DateTime = GetDateTime(i, lines),
+                    ErrorType = GetErrorType(i, lines),
+                    Description = GetDescription(i, lines)
+                };
+
                 logsList.Add(log);
-                log.dateTime = GetDateTime(i, list);
-                log.errorType = GetErrorType(i, list);
-                log.description = GetDescription(i, list);
-            }
-
-
-            using var context = new DataContext();
-            context.Log.AddRange(logsList);
-            context.SaveChanges();
+            }*/
 
             return logsList;
         }

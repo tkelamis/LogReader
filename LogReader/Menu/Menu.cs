@@ -17,7 +17,6 @@ namespace LogReader
             Console.WriteLine();
             return path;
         }
-
         public List<string> GetListOfFilesFromDirectory(string pathName)
         {
             List<string> filesList = new List<string>();
@@ -35,46 +34,39 @@ namespace LogReader
             {
                 count++;
                 Console.WriteLine("{0}.{1}", count, Path.GetFileName(file));
-                filesList.Add(string.Join(@"\", pathName, Path.GetFileName(file)));
+                filesList.Add(Path.Combine(pathName, Path.GetFileName(file)));
 
             }
             return filesList;
         }
-        public string SelectFileToOpenAndGiveMeItsPath(List<string> list)
+        public string SelectFileToOpenAndGiveMeItsPath(List<string> filesList)
         {
-            var flagProgrammRunning = true;
-
-            while (flagProgrammRunning)
+            while (true)
             {
-                Console.WriteLine("\nWhich logs file you want to draw data from???\n");
-                string input = Console.ReadLine();
-                var numberOfFileToOpen = Convert.ToInt32(input);
-                Console.WriteLine();
-                string pathOfFile = Path.GetFullPath(list[numberOfFileToOpen - 1]);
-                if (File.Exists(pathOfFile))
+                Console.WriteLine("\nWhich logs file do you want to draw data from?\n");
+
+                if (int.TryParse(Console.ReadLine(), out int numberOfFileToOpen) && numberOfFileToOpen >= 1 && numberOfFileToOpen <= filesList.Count)
                 {
-                    flagProgrammRunning = false;
-                    return pathOfFile;
+                    string pathOfFile = Path.GetFullPath(filesList[numberOfFileToOpen - 1]);
+
+                    if (File.Exists(pathOfFile))
+                    {
+                        return pathOfFile;
+                    }
+                    else
+                    {
+                        Console.WriteLine("The selected file doesn't exist!");
+                    }
                 }
                 else
                 {
-                    Console.WriteLine("The file doesn't exist!!");
+                    Console.WriteLine("Invalid input. Please enter a valid file number.");
                 }
             }
-            return null;
-        }
-
-        enum LogType
-        {
-            ShowErrorLogs = 1,
-            ShowWarningLogs,
-            ShowInfoLogs,
-            ShowUserNames
         }
         public void ChooseCategoryOfLogs(List<LogData> logList)
         {
-            bool flagChoiceIsWrong = false;
-            while (flagChoiceIsWrong == false)
+            while (true)
             {
                 Console.WriteLine("\nChoose an option:");
                 Console.WriteLine("1. Show me the logs with error");
@@ -83,13 +75,14 @@ namespace LogReader
                 Console.WriteLine("4. Show me the users mentioned in the logs");
                 Console.WriteLine("5. Exit");
                 Console.WriteLine();
+
                 if (Enum.TryParse(Console.ReadLine(), out LogType choice))
                 {
                     Console.WriteLine();
+
                     switch (choice)
                     {
                         case LogType.ShowErrorLogs:
-                            ShowMeErrorLogs();
                             ShowMeErrorLogs(logList);
                             break;
                         case LogType.ShowWarningLogs:
@@ -101,91 +94,93 @@ namespace LogReader
                         case LogType.ShowUserNames:
                             ShowMeUsersNames(logList);
                             break;
-                        default:
+                        case LogType.Exit:
                             Console.WriteLine("Goodbye!!!");
-                            flagChoiceIsWrong = true;
+                            return; // Exit the method
+                        default:
+                            Console.WriteLine("Invalid choice. Please select a valid option.");
                             break;
                     }
                 }
-            }
-        }
-        private void ShowMeErrorLogs()
-        {
-            using var context = new DataContext();
-            var infoLogs = context.Log
-                    .Where(log => log.errorType == "INFO")
-                    .ToList();
-
-            Console.WriteLine("Logs with Error Type INFO:");
-            foreach (var log in infoLogs)
-            {
-                Console.WriteLine($"LogId: {log.LogId}, DateTime: {log.dateTime}, ErrorType: {log.errorType}, Description: {log.description}");
+                else
+                {
+                    Console.WriteLine("Invalid input. Please enter a valid option number.");
+                }
             }
         }
         private void ShowMeErrorLogs(List<LogData> data)
         {
-            int i = 0;
-            foreach (var dato in data)
+            var errorLogs = data.Where(dato => dato.ErrorType == "ERROR").ToList();
+
+            if (errorLogs.Any())
             {
-                if (dato.errorType == "ERROR")
+                foreach (var log in errorLogs)
                 {
-                    i++;
-                    Console.WriteLine("{0} , {1} , {2}", dato.description, dato.dateTime, dato.errorType);
+                    Console.WriteLine($"{log.Description}, {log.DateTime}, {log.ErrorType}");
                 }
+                Console.WriteLine($"Total of {errorLogs.Count} error logs");
             }
-            Console.WriteLine("Total of {0} logs failed", i);
+            else
+            {
+                Console.WriteLine("No error logs found.");
+            }
         }
-        
         private void ShowMeWarningLogs(List<LogData> data)
         {
-            int i = 0;
-            foreach (var dato in data)
+            var warningLogs = data.Where(dato => dato.ErrorType == "WARNING").ToList();
+            if (warningLogs.Any())
             {
-                if (dato.errorType == "WARNING")
+                foreach (var log in warningLogs)
                 {
-                    i++;
-                    Console.WriteLine("{0} , {1} , {2}", dato.description, dato.dateTime, dato.errorType);
+                    Console.WriteLine($"{log.Description}, {log.DateTime}, {log.ErrorType}");
                 }
+                Console.WriteLine();
+                Console.WriteLine($"Total of {warningLogs.Count} warning logs");
             }
-            Console.WriteLine("Total of {0} logs have warnings", i);
+            else
+            {
+                Console.WriteLine("No error logs found.");
+            }
         }
         private void ShowMeSucceededLogs(List<LogData> data)
         {
-            int i = 0;
-            foreach (var dato in data)
+            var succededLogs = data.Where(dato => dato.ErrorType == "INFO").ToList();
+            if (succededLogs.Any())
             {
-                if (dato.errorType == "INFO")
+                foreach (var log in succededLogs)
                 {
-                    i++;
-                    Console.WriteLine("{0} , {1} , {2}", dato.description, dato.dateTime, dato.errorType);
+                    Console.WriteLine($"{log.Description}, {log.DateTime}, {log.ErrorType}");
                 }
+                Console.WriteLine($"Total of {succededLogs.Count} info logs");
             }
-            Console.WriteLine("Total of {0} logs succeeded", i);
+            else
+            {
+                Console.WriteLine("No error logs found.");
+            }
         }
         private void ShowMeUsersNames(List<LogData> list)
         {
-            List<Users> listOfUsers = ExtractUsers(list);
-            foreach (var item in listOfUsers)
+            var listOfUsers = ExtractUsers(list);
+
+            foreach (var user in listOfUsers)
             {
-                Console.WriteLine(item.name);
+                Console.WriteLine(user.Name);
             }
         }
         private List<Users> ExtractUsers(List<LogData> list)
         {
-            List<Users> usersList = new List<Users>();
-            foreach (var item in list)
-            {
-                if (item.description.LastIndexOf("User") != -1)
+            var usersList = list
+                .Where(item => item.Description.Contains("User"))
+                .Select(item =>
                 {
-                    Users user = new Users();
-                    //με αυτά κρατάω το όνομα του user
-                    var name = Convert.ToString(item.description.Remove(0, 6));
-                    var finalName = name.Remove(name.LastIndexOf("'"));
-                    //
-                    user.name = finalName;
-                    usersList.Add(user);
-                }
-            }
+                    var nameStartIndex = item.Description.IndexOf("User") + 6;
+                    var nameEndIndex = item.Description.LastIndexOf("'");
+                    var name = item.Description.Substring(nameStartIndex, nameEndIndex - nameStartIndex);
+
+                    return new Users { Name = name };
+                })
+                .ToList();
+
             return usersList;
         }
     }

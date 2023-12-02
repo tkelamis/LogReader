@@ -3,6 +3,6 @@
 
     public class Users
     {
-        public string name;
+        public string Name { get; set; }
     }
 }

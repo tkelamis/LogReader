@@ -38,9 +38,9 @@ namespace LogReader
             foreach (var item in list)
             {
                 LogData logItem = new LogData();
-                logItem.dateTime = DateTime.Parse(item.dateTime);
-                logItem.errorType = item.errorType;
-                logItem.description = item.description;
+                logItem.DateTime = DateTime.Parse(item.dateTime);
+                logItem.ErrorType = item.errorType;
+                logItem.Description = item.description;
                 logDataList.Add(logItem);
             }
             return logDataList;
