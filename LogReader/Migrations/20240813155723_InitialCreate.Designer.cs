@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LogReader.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20231202131922_ChangeTableName")]
-    partial class ChangeTableName
+    [Migration("20240813155723_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,14 +33,14 @@ namespace LogReader.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("LogId"));
 
-                    b.Property<DateTime>("dateTime")
+                    b.Property<DateTime>("DateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("description")
+                    b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("errorType")
+                    b.Property<string>("ErrorType")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

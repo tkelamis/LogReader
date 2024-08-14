@@ -12,9 +12,9 @@ using System;
 using System.Reflection;
 
 [assembly: System.Reflection.AssemblyCompanyAttribute("LogReader")]
-[assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
+[assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1c4a2152c42c1dfc20b0a9befea706727328c8bc")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+aaa50425eedfcacbaf7ee83a52754a37b53f9d55")]
 [assembly: System.Reflection.AssemblyProductAttribute("LogReader")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LogReader")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

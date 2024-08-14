@@ -6,24 +6,24 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace LogReader.Migrations
 {
     /// <inheritdoc />
-    public partial class InitializeDatabase : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "LogsData",
+                name: "Log",
                 columns: table => new
                 {
                     LogId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    dateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    errorType = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    description = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    DateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ErrorType = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_LogsData", x => x.LogId);
+                    table.PrimaryKey("PK_Log", x => x.LogId);
                 });
         }
 
@@ -31,7 +31,7 @@ namespace LogReader.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "LogsData");
+                name: "Log");
         }
     }
 }
